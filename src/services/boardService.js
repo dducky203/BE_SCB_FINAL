@@ -1,4 +1,5 @@
 //require den models
+const { boolean } = require('joi');
 const Board = require('../models/Board');
 
 class boardService {
@@ -33,7 +34,8 @@ class boardService {
         try {
             const result = await Board.findByIdAndDelete(id);
             console.log(result);
-            return true;
+            return result;
+            
 
         } catch (error) {
             throw error;
@@ -41,7 +43,7 @@ class boardService {
     }
 
     //danh sách các board
-    getAll = async(req, res, next) => {
+    getAll = async () => {
         try {
             const listBoards = await Board.find();
             return listBoards;
@@ -50,6 +52,18 @@ class boardService {
         }
     }
 
+    //check boadID 
+    checkBoardId = async (boardId) => {
+        try {
+            const result = await Board.findById(boardId);
+            return result;
+            
+        } catch (error) {
+            throw error;
+        }
+    }
 }
+
+
 
 module.exports = new boardService();

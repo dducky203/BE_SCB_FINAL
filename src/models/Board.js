@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
-// const moment = require('moment');
 
 const boardSchema = new mongoose.Schema({
     title: { type: String, required: true },
-    cover: {type: String, required: true},
-    dateCreated: { type: Date, default: Date.now()}
-    
+    cover: { type: String, required: true },
+    daterCeated: { type: Date, default: Date.now() },
+   // lists: [{ type: mongoose.Schema.Types.ObjectId, ref: 'List' }],
+   // cards: [{type: mongoose.Schema.Types.ObjectId, ref: 'Card'}]
+
 });
 
 const Board = mongoose.model('Board', boardSchema);

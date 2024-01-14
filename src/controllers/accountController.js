@@ -1,6 +1,5 @@
 const accountService = require("../services/accountService");
 const jwt = require('jsonwebtoken');
-const verifyToken = require('../middlewares/verifyToken');
 
 class accountController {
     creatAcount = async (req, res, next) => {
@@ -33,11 +32,11 @@ class accountController {
                 if (accountLogin) {
                     const token = jwt.sign({ username, password }, process.env.SECERT_KEY_JWT);
                     res.status(200).json({"msg": "Đăng nhập thành công !", token: token});
-                   // res.status(200).json({ "msg": "Đăng nhập thành công !" });
                     console.log(accountLogin);
                 } else {
                     res.status(500).json({ "msg": "Đăng nhập thất bại - Tài khoản hoặc mật khẩu không chính xác ! " });
                 }
+
             } else {
                 res.status(200).json({ "msg": "Tài khoản không tồn tại !" });
             }
