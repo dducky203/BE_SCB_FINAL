@@ -19,7 +19,9 @@ class cardService {
             const result = await Card.findByIdAndUpdate(
                 { _id: id },
                 {
-                    cardTitle: dataCard.cardTitle
+                    cardTitle: dataCard.cardTitle,
+                    describe: dataCard.describe,
+                    dueDate: dataCard.dueDate
                 });
             return true;
         } catch (error) {

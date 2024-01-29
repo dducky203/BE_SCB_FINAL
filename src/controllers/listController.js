@@ -5,11 +5,19 @@ class listController {
     //tạo mới list
     creatList = async (req, res, next) => {
         try {
-            const { listTitle, location, boardId } = req.body;
-            const dataList = { listTitle, location, boardId };
+            const { listTitle, location } = req.body;
+            const boardId = req.params.id;
+            const checkBoardId = await boardService.checkBoardId(boardId);
+            
+            if(!checkBoardId){
+                res.status(400).json({ 'msg': 'ID không tồn tại !' });
+            }else{
+                 const dataList = { listTitle, location , boardId};
       
-            const list = await listService.creatList(dataList);
-            res.status(200).json({ 'msg': `Tạo thành công List mới cho Board có id: ${boardId}  `, list });
+                const list = await listService.creatList(dataList);
+                res.status(200).json({ 'msg': `Tạo thành công List mới cho Board có id: ${boardId}  `, list });
+            }
+           
 
         } catch (error) {
             throw error;

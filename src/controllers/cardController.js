@@ -15,7 +15,7 @@ class cardController {
             //    // const attachmentPath = path.join(__dirname, 'uploads', attachment.filename);
             //   
             const { attachment, cardCover } = req.files;
-            
+
             const cardCoverPath = cardCover[0].fullPath;
             const attachmentPaths = attachment.map(file => file.fullPath);
 
@@ -41,8 +41,8 @@ class cardController {
                 res.status(400).json({ 'msg': 'ID không tồn tại !' });
             } else {
 
-                const { cardTitle } = req.body;
-                let dataCard = { cardTitle };
+                const { cardTitle, describe, dueDate } = req.body;
+                let dataCard = { cardTitle, describe, dueDate };
                 const result = await cardService.updateCardInList(cardId, dataCard);
                 if (result) {
                     res.status(200).json({ 'msg': 'Cập nhật thông tin Card thành công !' });

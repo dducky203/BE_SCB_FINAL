@@ -1,5 +1,4 @@
 //require den models
-const { boolean } = require('joi');
 const Board = require('../models/Board');
 
 class boardService {
@@ -22,10 +21,14 @@ class boardService {
     //chỉnh sửa thông tin board
     update = async (id, data) => {
         try {
-            const result = await Board.updateOne({ _id: id }, { title: data.title })
+             
+           //const result = await Board.updateOne({ _id: id }, { title: data.title, cover: data.cover });
+            await Board.findByIdAndUpdate(
+                {id},
+                { title: data.title});
             return true;
         } catch (error) {
-            throw error;
+            throw error; 
         }
     }
 
@@ -35,7 +38,7 @@ class boardService {
             const result = await Board.findByIdAndDelete(id);
             console.log(result);
             return result;
-            
+
 
         } catch (error) {
             throw error;
@@ -57,7 +60,7 @@ class boardService {
         try {
             const result = await Board.findById(boardId);
             return result;
-            
+
         } catch (error) {
             throw error;
         }

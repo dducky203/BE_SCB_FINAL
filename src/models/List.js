@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const listSchema = new mongoose.Schema({
-    listTitle: { type: String, require: true },
+    listTitle: { type: String},
     listCreationDate: { type: Date, default: Date.now() },
-    location: { type: Number, required: true },
+    location: { type: Number },
     boardId: { type: mongoose.Schema.Types.ObjectId, ref: 'Board' },
    //cardId: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Card'}]
 

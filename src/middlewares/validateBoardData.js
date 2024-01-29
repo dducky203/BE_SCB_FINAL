@@ -4,9 +4,7 @@ const boardValidationSchema = Joi.object({
     title: Joi.string().required().messages({
         'any.required': `"title" không được bỏ trống !`,
     }),
-    cover: Joi.string().required().messages({
-        'any.required': `"cover" không được bỏ trống !`,
-    })
+   
 });
 
 
