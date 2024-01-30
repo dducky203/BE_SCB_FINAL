@@ -21,14 +21,14 @@ class boardService {
     //chỉnh sửa thông tin board
     update = async (id, data) => {
         try {
-             
-           //const result = await Board.updateOne({ _id: id }, { title: data.title, cover: data.cover });
+
+            //const result = await Board.updateOne({ _id: id }, { title: data.title, cover: data.cover });
             await Board.findByIdAndUpdate(
-                {id},
-                { title: data.title});
+                { _id: id },
+                { title: data.title });
             return true;
         } catch (error) {
-            throw error; 
+            throw error;
         }
     }
 
