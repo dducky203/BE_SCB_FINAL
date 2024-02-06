@@ -13,17 +13,20 @@ class cardController {
             //const cardCoverPath = cardCover.map(file => file.fullPath);
             //     const cardCoverPath = path.join(__dirname, 'uploads', cardCover[0].filename);
             //    // const attachmentPath = path.join(__dirname, 'uploads', attachment.filename);
-            //   
-            const { attachment, cardCover } = req.files;
+            const checkListId = await listService.checkListId(listId);
 
-            const cardCoverPath = cardCover[0].fullPath;
-            const attachmentPaths = attachment.map(file => file.fullPath);
+            if (!checkListId) {
+                res.status(400).json({ 'msg': 'ID không tồn tại !' });
+            } else {
+                const { attachment, cardCover } = req.files;
+                const cardCoverPath = cardCover[0].fullPath;
+                const attachmentPaths = attachment.map(file => file.fullPath);
+                let dataCard = { cardTitle, describe, member, dueDate, cardCover: cardCoverPath, attachment: attachmentPaths, listId };
 
-            let dataCard = { cardTitle, describe, member, dueDate, cardCover: cardCoverPath, attachment: attachmentPaths, listId };
+                const card = await cardService.creatCardInList(dataCard);
 
-            const card = await cardService.creatCardInList(dataCard);
-
-            res.status(200).json({ 'msg': `Tạo thành công Card mới cho List có id: ${listId}  `, card });
+                res.status(200).json({ 'msg': `Tạo thành công Card mới cho List có id: ${listId}  `, card });
+            }
 
         } catch (error) {
             throw error;
